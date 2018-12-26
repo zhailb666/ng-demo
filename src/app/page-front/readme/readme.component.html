@@ -1,0 +1,65 @@
+<h1 style="height: 50px;text-align: center;font-weight: bold;font-size: 19px">
+  READ ME
+</h1>
+<nz-timeline>
+  <nz-timeline-item>
+    <nz-collapse>
+      <nz-collapse-panel [nzHeader]="'demo运行步骤'" [nzActive]="false">
+        <p style="margin:0;">
+          1: npm install<br/>
+          2: npm run start<br/>
+          3: npm run mock<br/>
+        </p>
+      </nz-collapse-panel>
+    </nz-collapse>
+  </nz-timeline-item>
+  <nz-timeline-item>
+    <nz-collapse>
+      <nz-collapse-panel [nzHeader]="'目录结构（模块）'" [nzActive]="false">
+        <p style="margin:0;">
+            ant-base(一些公共的方法)；<br/>
+            app-common(AppCommonModule 自定义了属性型指令，管道，通用组件);<br/>
+            app-core(顶层加载一次的Module封装在一起);<br/>
+            app-share(将开发中需要的组件（如管道，指令等）聚集成一个Module供其他module使用);<br/>
+            base 存放一些基类;<br/>
+            page-admin 后台管理应用（如果后台不是很多的话可以共用一个app）;<br/>
+            page-front 前端应用；<br/>
+            page-front-service 前端应用服务地方；<br/>
+        </p>
+      </nz-collapse-panel>
+    </nz-collapse>
+  </nz-timeline-item>
+  <nz-timeline-item>
+    <nz-collapse>
+      <nz-collapse-panel [nzHeader]="'对@NgModule()属性的理解  时间XXX'" [nzActive]="false">
+        <p style="margin:0;">
+          1：自己定义的组件必须 declarations () 进行申明 --案件见common-module<br/>
+          2：core-module里面应该放什么? share-module里面应该放什么?<br/>
+             如果你想用一些指令，管道，自定义的组件就应该先 imports到module中才可以使用；如 CommonModule,AppCommonModule(自定义的);<br/>
+             如果module不用写自定的组件仅作为一个shareModule的话，直接导出Module也是可以的如 AppShareModule;<br/>
+             那么core-module里面放的是啥呢，它只在入口处导入一次，可以反推出它不可能放指令，管道，等...只能放一些服务<br/>
+        </p>
+      </nz-collapse-panel>
+    </nz-collapse>
+  </nz-timeline-item>
+  <nz-timeline-item>
+    <nz-collapse>
+      <nz-collapse-panel [nzHeader]="'对http执行的流程研究 /front/userManage F12'" [nzActive]="false">
+        <p style="margin:0;">
+          1：打开F12,看接口请求的log<br/>
+          2: 如果有多个http中间件的执行流程是，例：app装置顺序为A,B,C 发送请求时 A-->B-->C 返回的时是 C-->B-->A<br/>
+        </p>
+      </nz-collapse-panel>
+    </nz-collapse>
+  </nz-timeline-item>
+  <nz-timeline-item>
+    <nz-collapse>
+      <nz-collapse-panel [nzHeader]="'json-server的使用'" [nzActive]="false">
+        <p style="margin:0;">
+          1:直接在mock文件夹下填加你需要模拟的数据，格式参考 book 和 user<br/>
+          2:文件修改后需重新npm run mock, 暂时没有实时监听文件变换功能<br/>
+        </p>
+      </nz-collapse-panel>
+    </nz-collapse>
+  </nz-timeline-item>
+</nz-timeline>

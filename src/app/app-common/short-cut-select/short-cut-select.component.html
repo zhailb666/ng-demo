@@ -1,0 +1,15 @@
+<nz-select [(ngModel)]="value"
+           [nzDisabled]="disabled"
+           style="min-width: 80px;width: 100%"
+           [nzPlaceHolder]="'请选择'"
+           (ngModelChange)="modelChange($event)"
+           [nzMode]="mode"
+           [nzShowSearch]="true"
+           [nzMaxMultipleCount]="maxMultipleCount">
+  <nz-option *ngFor="let option of options$|async"
+             [nzLabel]="option?.nat"
+             [nzValue]="option?.nat"></nz-option>
+  <nz-option [nzCustomContent]="true" [nzValue]="''" [nzLabel]="''">
+    <div (click)="shortCutManager()"><i class="anticon anticon-setting fn-MR5"></i>快捷语管理</div>
+  </nz-option>
+</nz-select>

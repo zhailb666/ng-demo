@@ -1,0 +1,94 @@
+<nz-tabset
+  style="height:100%"
+  [nzTabPosition]="'left'"
+  [nzShowPagination]= "false"
+  (nzSelectChange)="clearAllCheck($event)"
+  [(nzSelectedIndex)]="selectedIndex">
+  <nz-checkbox-wrapper (nzOnChange)="setSelectItem($event)">
+    <nz-tab [nzTitle]="tabs[0].label">
+      <nz-list
+        class="demo-loadmore-list"
+        [nzDataSource]="list"
+        [nzLoading] = "nzLoading"
+        [nzItemLayout]="'horizontal'"
+        [nzRenderItem]="item_a">
+        <ng-template #item_a let-item>
+          <nz-list-item [nzContent]="content_a">
+            <ng-template #content_a>
+              <label [nzValue]="item" nz-checkbox *ngIf="deleteFlagArr[0]">Checkbox</label>
+              <span class="fn-CuPo" (click)="itemClick(item)">{{item | json}}</span>
+            </ng-template>
+          </nz-list-item>
+        </ng-template>
+      </nz-list>
+    </nz-tab>
+    <nz-tab [nzTitle]="tabs[1].label">
+      <nz-list
+        class="demo-loadmore-list"
+        [nzDataSource]="list"
+        [nzLoading] = "nzLoading"
+        [nzItemLayout]="'horizontal'"
+        [nzRenderItem]="item_b">
+        <ng-template #item_b let-item>
+          <nz-list-item [nzContent]="content_b">
+            <ng-template #content_b>
+              <label nz-checkbox [nzValue]="item" *ngIf="deleteFlagArr[1]">Checkbox</label>
+              <span class="fn-CuPo" (click)="itemClick(item)">{{item | json}}</span>
+            </ng-template>
+          </nz-list-item>
+        </ng-template>
+      </nz-list>
+    </nz-tab>
+    <nz-tab [nzTitle]="tabs[2].label">
+      <nz-list
+        class="demo-loadmore-list"
+        [nzDataSource]="list"
+        [nzLoading] = "nzLoading"
+        [nzItemLayout]="'horizontal'"
+        [nzRenderItem]="item_c">
+        <ng-template #item_c let-item>
+          <nz-list-item [nzContent]="content_c">
+            <ng-template #content_c>
+              <label nz-checkbox [nzValue]="item" *ngIf="deleteFlagArr[2]">Checkbox</label>
+              <span class="fn-CuPo" (click)="itemClick(item)">{{item | json}}</span>
+            </ng-template>
+          </nz-list-item>
+        </ng-template>
+      </nz-list>
+    </nz-tab>
+  </nz-checkbox-wrapper>
+</nz-tabset>
+<div nz-row style="height: 20px; left: 30px; bottom: 16px" class="fn-FloatL">
+  <span class="fn-CuPo" (click)="toAddModel()"><i class="anticon anticon-plus-square-o fn-color-007bcc fn-MR2"></i>新增</span>
+  <span class="fn-CuPo fn-ML10" (click)="toDelete()"><i class="anticon anticon-delete fn-color-antError fn-MR2"></i>删除</span>
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="'新增'" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="closeAddModel()">
+  <ng-template #modalContent>
+    <form nz-form [formGroup]="form">
+      <nz-form-item>
+        <nz-form-label>快捷短语内容（400字以内</nz-form-label>
+        <nz-form-control>
+          <textarea formControlName="comment" nz-input rows="2" placeholder="请输入"></textarea>
+          <nz-form-explain *ngIf="form.get('comment')?.dirty && form.get('comment')?.errors">请输入内容</nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>新建/选择分组</nz-form-label>
+        <nz-form-control>
+          <nz-select style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="请选择" [formControlName]="'type'">
+            <nz-option  *ngFor="let o of tabs"  [nzLabel]="o.label" [nzValue]="o.value"></nz-option>
+          </nz-select>
+          <nz-form-explain *ngIf="form.get('type')?.dirty && form.get('type')?.errors">请选择分组</nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <div class="fn-TAL">
+      <button nz-button nzType="primary" (click)="submitAddModel()">保存</button>
+      <button nz-button nzType="default" (click)="closeAddModel()">取消</button>
+    </div>
+  </ng-template>
+</nz-modal>

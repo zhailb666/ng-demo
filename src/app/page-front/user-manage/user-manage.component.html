@@ -1,0 +1,32 @@
+<div appMoveDiv style="height: 80px;z-index: 999;width: 500px">
+  <nz-input-group nzSearch [nzSuffix]="suffixIconButton">
+    <input type="text" nz-input placeholder="input search text" #box>
+  </nz-input-group>
+  <ng-template #suffixIconButton>
+    <button nz-button nzType="primary" nzSearch style="width: 48px" (click)="getData(box.value)">
+      <i nz-icon type="search"></i>
+    </button>
+  </ng-template>
+</div>
+<nz-table #basicTable [nzData]="dataSet" [nzLoading]="loading">
+  <thead>
+  <tr>
+    <th>id</th>
+    <th>name</th>
+    <th>Address</th>
+    <th>date</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{data.id}}</td>
+    <td>{{data.name}}</td>
+    <td>{{data.address}}</td>
+    <td>{{data.date | myDate:'yyyy-M-dd' }}</td>
+    <td>
+      <a>Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
