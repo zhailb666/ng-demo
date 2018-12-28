@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BaseUtil} from '../../ant-base/base-util';
 import {FormGroup, Validators} from '@angular/forms';
-import {FormlyFieldConfig} from '@ngx-formly/core';
+// import {any} from '@ngx-formly/core';
 
 @Component({
   selector: 'app-form',
@@ -16,7 +16,7 @@ export class FormComponent {
   });
   formGroup = new FormGroup({});
   model_ly = {};
-  fields: FormlyFieldConfig[] = [
+  fields: any[] = [
     {
       type: 'textInput',
       template: '<span>abc</span>',
@@ -41,7 +41,7 @@ export class FormComponent {
         maxLength: 2,
         step: 1,
         tabIndex: 2,
-        change: (field: FormlyFieldConfig, event: any) => {
+        change: (field: any, event: any) => {
           console.log(field, event.target.value);
           // event.target.value
         },
@@ -60,7 +60,7 @@ export class FormComponent {
       validators: {
         ip: {
           expression: (c) => !c.value || /^\d+$/.test(c.value),
-          message: (error, field: FormlyFieldConfig) => `"${field.formControl.value}" is not a valid IP Address`,
+          message: (error, field: any) => `"${field.formControl.value}" is not a valid IP Address`,
         },
       },
       wrappers: ['wrapper'],
